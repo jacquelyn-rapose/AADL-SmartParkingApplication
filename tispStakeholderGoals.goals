@@ -1,0 +1,40 @@
+stakeholder goals tispStakeholderGoals
+for SmartParkingSystem::tispSys.impl
+[
+	description "Stakeholder goals for the Traveler Information - Smart Parking application"
+	
+	goal G1 : "Correctness" [
+		description "The system shall perform the desired functions"
+		rationale "The system has to provide correct parking information to the drivers and correctly interface with road side equipment"
+		stakeholder TISPOrg.Client
+	]
+	
+	goal G2 : "Completeness" [
+		description "The system shall handle and store both static and dynamic data"
+		rationale "The information collected about vehicles and parking spaces must be static as well as dynamic"
+		stakeholder TISPOrg.Developer
+	]
+	
+	goal G3 : "Safety" [
+		description "The system will calculate a strategy for parking and present information to the driver accordingly"
+		rationale "The driver will use the parking information provided by the system to make a decision about parking"
+		stakeholder TISPOrg.Client
+	]
+	goal G4 : "Security" [
+		description "The system shall provide a secure communication channel between Vehicle and Roadside equipment "
+		rationale "The user data about traffic and parking should not be lost"
+		stakeholder TISPOrg.Client
+	]
+	
+	goal G5 : "Reliability" [
+		description "The system shall perform consistently under high demand"
+		rationale "The system should be able to perform consistently under any demands for parking in the connected vehicle environment"
+		stakeholder TISPOrg.Developer
+	]
+	
+	goal G6 : "Availability" [
+		description "The system shall operate at all instances of time"
+		rationale "The system is responsible for providing real-time information to drivers"
+		stakeholder TISPOrg.Developer
+	]
+]

@@ -1,0 +1,9 @@
+organization TISPOrg
+stakeholder Client [
+	full name "Jacquelyn Rapose"
+	email "jrapose"
+]
+stakeholder  Developer [
+	full name "Priyanka Jaiswal"
+	email "pjaiswa"
+]

@@ -1,0 +1,24 @@
+package TISPResoluteLib
+public
+	annex Resolute{** 	
+		checkAllStatus(parkingStatus:tispproperties.dataBooleanType,roadsideStatus:tispproperties.dataBooleanType)<=
+				**"Parking status of vehicle:" parkingStatus ", Roadside status of RSE:" roadsideStatus** 
+				true			
+		
+	 testDevicePower(VOBE_signal:tispproperties.dataBooleanType)<=
+				**"Vehicle OBE data signal value:"VOBE_signal** 
+				true	
+			
+	 testTimingData(time1:tispproperties.dataIntegerType,time2:tispproperties.dataIntegerType,time3:tispproperties.dataIntegerType)<=
+				**"Total time for uploading data:"time1", Total time for storing data:" time2", Total time for downloading data:" time3** 
+				 true 
+					
+	 testWarning(warning_signals:tispproperties.dataIntegerType)<=
+				**" Is warning signal off? : "warning_signals**
+				true	
+					
+	 checkISPconnection(a:tispproperties.dataBooleanType)<=
+					**"Look up value of ISP connection: "a**
+		          true
+	**};
+end TISPResoluteLib;

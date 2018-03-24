@@ -1,0 +1,118 @@
+package SmartParkingSystem
+public
+	with RSE;
+	with InformationServiceProvider;
+	with Driver;
+	with Base_Types;
+	with tispProperties;
+	
+	data sample
+		properties
+		 	 tispProperties::dataIntegerType => 1;
+			tispProperties::dataBooleanType=> true;
+	end sample;
+	
+	
+	system tispSys
+		features
+			signal_in: in data port Base_Types::Integer;
+			signal2_in: in data port Base_Types::Integer;
+			signal3_in: in data port Base_Types::Integer;		 			
+		
+		annex agree {** 
+		assume "process input limit " : signal_in<=2 ;
+		assume "process input limit " : signal2_in<=2 ;
+	**};
+   
+	end tispSys;
+	system implementation tispSys.impl
+		subcomponents
+			sub_vehicleOBE: device VehicleOBE;
+			sub_roadsideOBE: device RoadsideOBE;
+			sub_parkingManager: process ParkingManager;
+			sub_driver : abstract Driver::driver.impl;
+			sub_TIC: processor InformationServiceProvider::TIC.impl;
+			sub_hardwareComm: bus InformationServiceProvider::hardwareComm.impl;
+			sub_RSE_ElectricChargeSupportProvider: process RSE::RSE_ElectricChargeSupportProvider;
+			sub_RSE_WorkzoneSafetyProvider: process RSE::RSE_WorkzoneSafetyProvider;
+			sub_RSE_TravelInformationCommunicationProvider: process RSE::RSE_TravelInformationCommunicationProvider;
+			sub_RSE_TrafficMeteringProvider:process RSE::RSE_TrafficMeteringProvider;
+			sub_RSE_SpeedManagementProvider:process RSE::RSE_SpeedManagementProvider;
+		connections
+			in_ECSP: port signal_in -> sub_RSE_ElectricChargeSupportProvider.RSE_ECSP_data_in;
+			in_ParkingMan: port signal3_in -> sub_parkingManager.signal_in;		
+			in_ESMP: port signal2_in -> sub_RSE_TravelInformationCommunicationProvider.RSE_TICP_data_in;
+			busConnection: bus access sub_hardwareComm -> sub_TIC.bus_access;		
+			sendInfoToDriver:port sub_parkingManager.signal_out -> sub_driver.DriverInfo_input
+			{Communication_Properties::Timing => immediate;}
+			;
+		
+			roadsideDataPacket1:port sub_RSE_ElectricChargeSupportProvider.RSE_ECSP_data_out -> sub_roadsideOBE.parking_data_received
+			{Communication_Properties::Timing => immediate;}
+			;
+	
+	
+			vehicleDataPacket3:port sub_RSE_TravelInformationCommunicationProvider.RSE_TICP_data_out -> sub_vehicleOBE.parking_data_received
+			{Communication_Properties::Timing => immediate;}
+			;	
+		annex Resolute{**
+				
+			prove(checkAllStatus(true,true))
+			prove (testDevicePower(true))
+			prove (testTimingData(10,10,5))
+			prove (testWarning(1))
+			prove (checkISPconnection(true))
+
+		**};	
+	end tispSys.impl;
+	device VehicleOBE
+		features
+			
+			signal_out: out data port Base_Types::Integer;
+			parking_data_received: in data port Base_Types::Integer;
+		flows
+			Vehicle_sink : flow sink parking_data_received;
+			Vehicle_source : flow source signal_out;
+		annex agree {** 
+			assume "device input limit " : parking_data_received  <= 2 ;
+			guarantee "device output limit" : signal_out = parking_data_received;
+		**};
+	end VehicleOBE;
+	device implementation VehicleOBE.impl
+		
+	end VehicleOBE.impl;
+	
+	device RoadsideOBE
+		features	
+			signal_out: out data port Base_Types::Integer;
+			parking_data_received: in data port Base_Types::Integer;
+		flows
+			Roadside_sink : flow sink parking_data_received;
+			Roadside_source : flow source signal_out;
+		annex agree {** 
+			assume "device input limit " : parking_data_received <= 2 ;
+			guarantee "device output limit" : signal_out = parking_data_received;
+		**};
+	end RoadsideOBE;
+	device implementation RoadsideOBE.impl
+		
+	end RoadsideOBE.impl;
+	
+	process ParkingManager
+		features
+		signal_out: out data port Base_Types::Integer;
+		signal_in: in data port Base_Types::Integer;
+		flows
+			Roadside_sink : flow sink signal_in;
+			Roadside_source : flow source signal_out;
+		annex agree {** 
+	
+		guarantee "process output limit" : signal_out = signal_in;
+	**};
+					
+	end ParkingManager;
+	process implementation ParkingManager.impl
+		
+	end ParkingManager.impl;
+	
+end SmartParkingSystem;

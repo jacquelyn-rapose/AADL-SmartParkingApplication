@@ -1,0 +1,17 @@
+verification methods tispVerificationMethods: "Activities for tispReqs" [
+	method checkAllStatus(x: boolean) :"Checking of status variables"[
+	resolute checkAllStatus
+	]
+	method testDevicePower(a: boolean): "testing device connections"[
+	resolute testDevicePower
+	]
+	method testTimingData(a: integer,b:integer,c: integer): "display total times"[
+	resolute testTimingData
+	]
+	method testWarning(a: integer): "check warning signal"[
+	resolute testWarning
+	]
+	method checkISPconnection(a: boolean): "checking if connection is active"[
+	resolute checkISPconnection
+	]	
+]

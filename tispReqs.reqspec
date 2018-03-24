@@ -1,0 +1,67 @@
+system requirements tispReqs : "Requirements for the Smart Parking system "
+for SmartParkingSystem::tispSys.impl
+[
+	
+	requirement R1 : "All the parking status and traffic information to driver must be provided correctly through all the Road side parking equipment"
+	[
+		description "All the static and dynamic information must be provided to the driver and parking manager through vehicle OBE data and RSE data respectively"
+		rationale "If the information is not provided about the traffic or any situation/state inside the parking lot, it can lead to chaos among the drivers"
+		issues "Integrity level 3"
+		see goal tispStakeholderGoals.G1
+		uncertainty[
+			volatility 3
+			impact 5
+		]
+	]
+	
+	requirement R2 : "Vehicle OBE/ a personal information device should be installed in all vehicles and must be examined before the RSE owner gets the device"
+	[
+		description "All the on board devices provides the collected information to the driver which makes it easier for finding parking spaces"
+		rationale "Absence of a Vehicle OBE/ a personal information device can cause trouble for Parking Manager to provide drivers with parking spaces as the driver cannot get any guidance"
+		issues "Integrity level 2"
+		see goal tispStakeholderGoals.G2
+		uncertainty[
+			volatility 2
+			impact 4
+		]
+	]
+	
+	requirement R3 : "All the information regarding parking must be stored and pre-informed to the driver"
+	[
+		description "The parking information must be transmitted by Information Service Provider to prevent vehicles from blocking the parking area"
+		rationale "If proper information is not given to the driver in real time about the parking, it can cause a hustle while parking"
+		issues "Integrity level 3"
+		mitigates "Crashes due to lane overshooting"
+		see goal tispStakeholderGoals.G3
+		uncertainty[
+			volatility 1
+			impact 3
+		]
+	]
+	
+	requirement R4 : "All the warning equipments must be checked and examined properly for Vehicle basic safety functions and Roadside information reception"
+	[
+		description "Warning systems in smart parking shall prevent collision of vehicles and drivers are also given prior indication of danger"
+		rationale "Failure in checking warning system will result in accidents and other major issues among travelers"
+		issues "Integrity level 3"
+		see goal tispStakeholderGoals.G4
+		uncertainty[
+			volatility 1
+			impact 4
+		]
+	]
+	
+	requirement R5 : "All the information flowing between devices and RSE must be via information service provider"
+	[
+		description "Cooperative information sharing is guaranteed by using ISP"
+		rationale "ISP prevents the misuse of information sharing between devices"
+		issues "Integrity level 2"
+	]
+	
+	requirement R6 : "Quality of the collected data is checked and stored before delivery"
+	[
+		description "All the information is collected,refined, and stored by parking manager"
+		rationale "Unverified and untested data can cause issues among drivers and can result in harm to the environment"
+		issues "Integrity level 1"
+	]
+]

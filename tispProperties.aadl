@@ -1,0 +1,6 @@
+property set tispProperties is
+	
+	dataIntegerType:aadlinteger applies to (data);
+    dataBooleanType: aadlboolean applies to (data);
+     
+end tispProperties;

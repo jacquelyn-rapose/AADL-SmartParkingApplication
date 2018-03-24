@@ -1,0 +1,18 @@
+package Driver
+public
+	with Base_Types;
+	abstract Driver
+		features	
+			DriverInfo_input: in data port Base_Types::Integer;
+		--	DriverUpdate_input: in data port Base_Types::Integer;
+			DriverOut: out data port Base_Types::Integer;
+		flows
+			driver_sink : flow sink DriverInfo_input;
+			driver_source : flow source DriverOut;
+			annex agree {** 
+	**};
+		end Driver;
+		abstract implementation driver.impl
+			
+		end driver.impl;
+end Driver;

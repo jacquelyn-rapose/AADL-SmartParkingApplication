@@ -1,0 +1,76 @@
+package RSE
+public
+	with Base_Types;
+	system RSEOwner
+    end RSEOwner;
+	system implementation RSEOwner.impl
+		subcomponents
+			RSE_ElectricChargeSupportProvider : process RSE_ElectricChargeSupportProvider;
+			RSE_WorkzoneSafetyProvider:process RSE_WorkzoneSafetyProvider;
+			RSE_TravelInformationCommunicationProvider:process RSE_TravelInformationCommunicationProvider;
+			RSE_TrafficMeteringProvider:process RSE_TrafficMeteringProvider;
+			RSE_SpeedManagementProvider:process RSE_SpeedManagementProvider;
+	end RSEOwner.impl;		
+		
+			
+	process RSE_ElectricChargeSupportProvider
+				features
+					RSE_ECSP_data_in : in data port Base_Types::Integer;
+			        RSE_ECSP_data_out : out data port Base_Types::Integer;
+			    flows
+					sys_RSE_ECSP_sink : flow sink RSE_ECSP_data_in;
+					sys_RSE_ECSP_source : flow source RSE_ECSP_data_out;
+				annex agree {** 
+		guarantee "process output limit" : RSE_ECSP_data_out = RSE_ECSP_data_in;
+	**};
+	end RSE_ElectricChargeSupportProvider;
+			
+	process RSE_WorkzoneSafetyProvider
+			features
+					RSE_WSP_data_in : in data port Base_Types::Integer;
+			        RSE_WSP_data_out : out data port Base_Types::Integer;
+			    flows
+					sys_RSE_WSP_sink : flow sink RSE_WSP_data_in;
+					sys_RSE_WSP_source : flow source RSE_WSP_data_out;
+					annex agree {** 
+		guarantee "process output limit" : RSE_WSP_data_out = RSE_WSP_data_in;
+	**};
+	end RSE_WorkzoneSafetyProvider;
+
+	process RSE_TravelInformationCommunicationProvider
+	       features
+					RSE_TICP_data_in : in data port Base_Types::Integer;
+			        RSE_TICP_data_out : out data port Base_Types::Integer;
+			    flows
+					sys_RSE_TICP_sink : flow sink RSE_TICP_data_in;
+					sys_RSE_TICP_source : flow source RSE_TICP_data_out;
+						annex agree {** 
+		guarantee "process output limit" : RSE_TICP_data_out = RSE_TICP_data_in;
+	**};
+	end RSE_TravelInformationCommunicationProvider;
+	
+	process RSE_TrafficMeteringProvider
+	       features
+					RSE_TMP_data_in : in data port Base_Types::Integer;
+			        RSE_TMP_data_out : out data port Base_Types::Integer;
+			    flows
+					sys_RSE_TMP_sink : flow sink RSE_TMP_data_in;
+					sys_RSE_TMP_source : flow source RSE_TMP_data_out;
+						annex agree {** 
+		guarantee "process output limit" :RSE_TMP_data_out = RSE_TMP_data_in;
+	**};
+	end RSE_TrafficMeteringProvider;
+	
+	process RSE_SpeedManagementProvider
+	       features
+					RSE_SMP_data_in : in data port Base_Types::Integer;
+			        RSE_SMP_data_out : out data port Base_Types::Integer;
+			    flows
+					sys_RSE_SMP_sink : flow sink RSE_SMP_data_in;
+					sys_RSE_SMP_source : flow source RSE_SMP_data_out;
+						annex agree {** 
+		guarantee "process output limit" :RSE_SMP_data_out = RSE_SMP_data_in;
+	**};
+	end RSE_SpeedManagementProvider;
+	
+end RSE;

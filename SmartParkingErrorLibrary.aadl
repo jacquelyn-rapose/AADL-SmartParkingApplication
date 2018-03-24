@@ -1,0 +1,56 @@
+package SmartParkingErrorLibrary
+public
+	annex EMV2{**
+		error types
+		
+		ValueError: type;
+		NoValue : type extends ValueError;
+		BadValue : type extends ValueError;
+		OutOfRangeValue : type extends ValueError;
+		CorruptValue : type extends ValueError;
+			
+		ServiceError: type;
+		ItemOmission: type extends ServiceError; 
+		ServiceOmission: type extends ServiceError;
+		ItemCommission: type extends ServiceError; 
+		ServiceCommission: type extends ServiceError;
+		
+		TimingError: type; 
+		EarlyDelivery: type extends TimingError; 
+		LateDelivery: type extends TimingError; 
+
+		SequenceError: type;
+		OutofOrder : type extends SequenceError;
+		ValueChange : type extends SequenceError; 
+			
+		RateError : type;
+		HighRate : type extends RateError;
+		LowRate : type extends RateError;
+		
+		ReplicationError : type;
+		SoftwareFailure : type;
+		HardwareFailure : type;
+		
+        ServiceValueError: type;
+		OutOfCalibration: type extends ServiceValueError;
+
+		ConcurrencyError: type;
+		MutExError: type extends ConcurrencyError;
+		Deadlock: type extends MutExError;
+		Starvation: type extends MutExError;
+		
+		end types;
+		error behavior system_states
+			states
+				operational : initial state;
+				failed : state;
+		end behavior;
+		
+		error behavior system_modes
+			states
+				SignalProcessing : initial state;
+				SignalFailed : state;
+				SignalRecovery : state;
+		end behavior;
+			**};
+end SmartParkingErrorLibrary;

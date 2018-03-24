@@ -1,0 +1,33 @@
+package InformationServiceProvider
+public
+	system ISP
+	end ISP;	
+	system implementation ISP.impl
+	subcomponents
+	  sub_TIC: processor TIC.impl;
+	  sub_hw_bus: bus hardwareComm.impl;
+	connections
+			bus_signals: bus access sub_hw_bus -> sub_TIC.bus_access;
+	end ISP.impl;
+	-- Transportation Information Center
+	processor TIC
+		features
+			bus_access: requires bus access hardwareComm;
+	end TIC;
+	processor implementation TIC.impl
+		subcomponents
+			collection: memory dataCollection;
+	end TIC.impl;
+	
+	memory dataCollection
+		
+	end dataCollection;
+	
+	bus hardwareComm
+		
+	end hardwareComm;
+	bus implementation hardwareComm.impl
+		
+	end hardwareComm.impl;
+
+end InformationServiceProvider;

@@ -1,0 +1,45 @@
+verification plan SmartParkingPlan for tispReqs
+[
+	claim R1 : "All the parking status and traffic information to driver must be provided correctly through all the Road side parking equipment"
+	[
+		rationale "If the information is not provided about the traffic or any situation/state inside the parking lot, it can lead to chaos among the drivers"
+		activities
+		R1_ActivityTest1:"Test for checking status variables":tispVerificationMethods.checkAllStatus(parkingStatus,roadsideStatus)		
+	]
+	
+	claim R2 : "Vehicle OBE/ a personal information device should be installed in all vehicles and must be examined before the RSE owner gets the device"
+	[
+		rationale "Absence of a Vehicle OBE/ a personal information device can cause trouble for Parking Manager to provide drivers with parking spaces as the driver cannot get any guidance"
+		activities
+		R2_ActivityTest1:"Test for testing device connections":tispVerificationMethods.testDevicePower(VOBE_signal)
+	]
+	
+	claim R3 : "All the information regarding parking must be stored and pre-informed to the driver"
+	[
+		rationale "If proper information is not given to the driver in real time about the parking, it can cause a hustle while parking"
+		activities
+		R3_ActivityTest1:"Test for checking timings ":tispVerificationMethods.testTimingData(time1,time2,time3)
+	]
+	
+	claim R4 : "All the warning equipments must be checked and examined properly for Vehicle basic safety functions and Roadside information reception"
+	[
+		rationale "Failure in checking warning system will result in accidents and other major issues among travelers"
+		activities
+		R4_ActivityTest1:"Test for testing warning signals":tispVerificationMethods.testWarning(warning_signal)
+	]
+	
+	claim R5 : "All the information flowing between devices and RSE must be via information service provider"
+	[
+		rationale "ISP prevents the misuse of information sharing between devices"
+		activities
+		R5_ActivityTest1:"Test for checking presence of ISP ":tispVerificationMethods.checkISPconnection()
+	
+	]
+	
+	claim R6 : "Quality of the collected data is checked and stored before delivery"
+	[
+		rationale "Unverified and untested data can cause issues among drivers and can result in harm to the environment"
+		activities
+		R6_ActivityTest1:"Test for verifying data quality":tispVerificationMethods.compareDataValues()
+	]
+] 
